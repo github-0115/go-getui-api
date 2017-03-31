@@ -2,6 +2,7 @@ package getui
 
 import (
 	"bytes"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -78,4 +79,14 @@ func Delete(url string, auth_token string, bodyByte []byte) (string, error) {
 	}
 
 	return string(result), nil
+}
+
+func GetBody(parmar interface{}) ([]byte, error) {
+
+	body, err := json.Marshal(parmar)
+	if err != nil {
+		return nil, err
+	}
+
+	return body, nil
 }

@@ -23,7 +23,7 @@ type SaveListBodyParmar struct {
 func SaveListBody(appId string, auth_token string, parmar *SaveListBodyParmar) (*SaveListBodyResult, error) {
 
 	url := TOKEN_DOMAIN + appId + "/save_list_body"
-	bodyByte, err := GetSaveListBodyBody(parmar)
+	bodyByte, err := GetBody(parmar)
 	if err != nil {
 		return nil, err
 	}
@@ -39,14 +39,4 @@ func SaveListBody(appId string, auth_token string, parmar *SaveListBodyParmar) (
 	}
 
 	return saveListBodyResult, err
-}
-
-func GetSaveListBodyBody(parmar *SaveListBodyParmar) ([]byte, error) {
-
-	body, err := json.Marshal(parmar)
-	if err != nil {
-		return nil, err
-	}
-
-	return body, nil
 }

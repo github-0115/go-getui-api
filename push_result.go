@@ -1,10 +1,10 @@
 package getui
 
-//import (
-//	"encoding/json"
-//)
+import (
+	"encoding/json"
+)
 
-type pushRESResult struct {
+type PushRESResult struct {
 	Result     string      `json:"result"`
 	TaskId     string      `json:"taskid"`     //任务标识号
 	Data       string      `json:"data"`       //查询数据对象
@@ -16,6 +16,27 @@ type pushRESResult struct {
 	APN        interface{} `json:"clickNum"`   //iOS推送结果数据，详细字段参考GT
 }
 
-type pushRESParmar struct {
+type PushRESParmar struct {
 	TaskIdList []string `json:"taskIdList"` //查询的任务尖列表
+}
+
+func PushResult(appId string, auth_token string, parmar *PushRESParmar) (*PushRESResult, error) {
+
+	url := TOKEN_DOMAIN + appId + "/push_result"
+	bodyByte, err := GetBody(parmar)
+	if err != nil {
+		return nil, err
+	}
+
+	result, err := BytePost(url, auth_token, bodyByte)
+	if err != nil {
+		return nil, err
+	}
+
+	pushRESResult := new(PushRESResult)
+	if err := json.Unmarshal([]byte(result), &pushRESResult); err != nil {
+		return nil, err
+	}
+
+	return pushRESResult, err
 }

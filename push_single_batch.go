@@ -30,7 +30,7 @@ type PushSigleBatchParmar struct {
 func PushSigleBatch(appId string, auth_token string, parmar *PushSigleBatchListParmar) (*PushSigleBatchResult, error) {
 
 	url := TOKEN_DOMAIN + appId + "/push_single_batch"
-	bodyByte, err := GetPushSigleBatchBody(parmar)
+	bodyByte, err := GetBody(parmar)
 	if err != nil {
 		return nil, err
 	}
@@ -46,14 +46,4 @@ func PushSigleBatch(appId string, auth_token string, parmar *PushSigleBatchListP
 	}
 
 	return pushSigleBatchResult, err
-}
-
-func GetPushSigleBatchBody(parmar *PushSigleBatchListParmar) ([]byte, error) {
-
-	body, err := json.Marshal(parmar)
-	if err != nil {
-		return nil, err
-	}
-
-	return body, nil
 }

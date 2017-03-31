@@ -26,7 +26,7 @@ type PushSingleResult struct {
 func PushSingle(appId string, auth_token string, parmar *PushSingleParmar) (*PushSingleResult, error) {
 
 	url := TOKEN_DOMAIN + appId + "/push_single"
-	bodyByte, err := GetPushSingleBody(parmar)
+	bodyByte, err := GetBody(parmar)
 	if err != nil {
 		return nil, err
 	}
@@ -42,14 +42,4 @@ func PushSingle(appId string, auth_token string, parmar *PushSingleParmar) (*Pus
 	}
 
 	return pushSingleResult, err
-}
-
-func GetPushSingleBody(parmar *PushSingleParmar) ([]byte, error) {
-
-	body, err := json.Marshal(parmar)
-	if err != nil {
-		return nil, err
-	}
-
-	return body, nil
 }

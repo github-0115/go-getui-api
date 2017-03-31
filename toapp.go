@@ -24,7 +24,7 @@ type ToAppParmar struct {
 func ToApp(appId string, auth_token string, toAppParmar *ToAppParmar) (*ToAppResult, error) {
 
 	url := TOKEN_DOMAIN + appId + "/push_app"
-	bodyByte, err := GetPushAppBody(toAppParmar)
+	bodyByte, err := GetBody(toAppParmar)
 	if err != nil {
 		return nil, err
 	}
@@ -40,14 +40,4 @@ func ToApp(appId string, auth_token string, toAppParmar *ToAppParmar) (*ToAppRes
 	}
 
 	return toAppResult, err
-}
-
-func GetPushAppBody(toAppParmar *ToAppParmar) ([]byte, error) {
-
-	body, err := json.Marshal(toAppParmar)
-	if err != nil {
-		return nil, err
-	}
-
-	return body, nil
 }

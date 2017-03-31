@@ -22,7 +22,7 @@ type PushListParmar struct {
 func PushList(appId string, auth_token string, parmar *PushListParmar) (*PushListResult, error) {
 
 	url := TOKEN_DOMAIN + appId + "/push_list"
-	bodyByte, err := GetPushListBody(parmar)
+	bodyByte, err := GetBody(parmar)
 	if err != nil {
 		return nil, err
 	}
@@ -38,14 +38,4 @@ func PushList(appId string, auth_token string, parmar *PushListParmar) (*PushLis
 	}
 
 	return pushListResult, err
-}
-
-func GetPushListBody(parmar *PushListParmar) ([]byte, error) {
-
-	body, err := json.Marshal(parmar)
-	if err != nil {
-		return nil, err
-	}
-
-	return body, nil
 }
