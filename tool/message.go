@@ -8,6 +8,15 @@ type Message struct {
 	MsgType           string `json:"msgtype"`                       //	消息应用类型，可选项：notification、link、notypopload、transmission
 }
 
+type messageType struct {
+	Notification string
+	Link         string
+	Notypopload  string
+	Transmission string
+}
+
+var MsgType = &messageType{"notification", "link", "notypopload", "transmission"}
+
 func GetMessage() *Message {
 	message := &Message{
 		IsOffline:         true,
